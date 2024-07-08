@@ -1,17 +1,12 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Experience } from "./experience/experience";
 
 @Component({
 	selector: "app-root",
 	standalone: true,
-	imports: [RouterOutlet],
 	template: `
-		<h1>Welcome to {{ title }}!</h1>
-
-		<router-outlet />
+		<app-experience />
 	`,
-	styles: [],
+	imports: [Experience],
 })
-export class AppComponent {
-	title = "ngt-porsche-lightformer";
-}
+export class AppComponent {}
