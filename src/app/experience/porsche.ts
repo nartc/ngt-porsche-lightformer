@@ -3,11 +3,13 @@ import {
 	Component,
 	computed,
 	CUSTOM_ELEMENTS_SCHEMA,
+	effect,
 	input,
 } from "@angular/core";
 import { applyProps, NgtArgs } from "angular-three";
 import { injectGLTF } from "angular-three-soba/loaders";
 import { Mesh } from "three";
+import { color } from "../color";
 
 @Component({
 	selector: "app-porsche",
@@ -63,9 +65,18 @@ export class Porsche {
 			envMapIntensity: 2,
 			roughness: 0.45,
 			metalness: 0.8,
-			color: "#555",
+			color: color(),
 		});
 
 		return scene;
 	});
+
+	constructor() {
+		effect(() => {
+			const gltf = this.gltf();
+			if (!gltf) return;
+			const { materials } = gltf;
+			applyProps(materials["paint"], { color: color() });
+		});
+	}
 }
